@@ -55,9 +55,11 @@ create_symlink() {
     fi
 }
 
-# Create a backup file with a timestamped name.
+# Create a backup with a timestamped name.
 backup()
 {
-    backup_suffix=`date +%Y%m%d-%H%M%S-%N`
-    cp -r ${1}{,.${backup_suffix}}
+    if [ -f $1 ]; then
+        backup_suffix=`date +%Y%m%d-%H%M%S-%N~`
+        cp -r ${1}{,.${backup_suffix}}
+    fi
 }

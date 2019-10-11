@@ -44,6 +44,11 @@ PROMPT_COMMAND='history -a'
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
 # double tap ctrl-d to close the terminal.
 export IGNOREEOF=1
 
@@ -71,6 +76,11 @@ if [ "$COLORTERM" == "xfce4-terminal" ]; then
     export TERM=xterm-256color
 fi
 
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
 # Get the number of colours supported by the terminal.
 term_colours=$(tput colors)
 
@@ -80,6 +90,15 @@ if [ "$term_colours" = "256" ]; then
 else
     export PS1="\[\033[38;5;1m\]\u\[$(tput sgr0)\]\[\033[38;5;7m\]@\[$(tput sgr0)\]\[\033[38;5;6m\]\h\[$(tput sgr0)\]\[\033[38;5;7m\]:\[$(tput sgr0)\]\[\033[38;5;2m\]\w\[$(tput sgr0)\]\[\033[38;5;7m\] \\$ \[$(tput sgr0)\]"
 fi
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
 # enable color support of ls and also add handy aliases.
 if is_command dircolors; then
@@ -103,10 +122,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
-
-# Set PATH so it includes user's personal bin directory.
-path_prepend "$HOME/.local/bin"
-path_prepend "$HOME/bin"
 
 # Source additional bash config files.
 if [ -d $HOME/.bashrc.d ]; then

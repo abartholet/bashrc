@@ -71,11 +71,6 @@ fi
 # make less more friendly for non-text input files, see lesspipe(1)
 is_command lesspipe && eval "$(SHELL=/bin/sh lesspipe)"
 
-# Fix terminal colour in xfce terminal.
-if [ "$COLORTERM" == "xfce4-terminal" ]; then
-    export TERM=xterm-256color
-fi
-
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;

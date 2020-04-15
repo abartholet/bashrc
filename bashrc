@@ -118,6 +118,11 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
 
+# Disable system bell
+if [ -n "$DISPLAY" ]; then
+    xset b off
+fi
+
 # Source additional bash config files.
 if [ -d $HOME/.bashrc.d ]; then
     files=`find "$HOME/.bashrc.d/" -regextype sed -regex ".*/bash_.*[^~]$"`

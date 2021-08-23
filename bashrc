@@ -15,11 +15,11 @@ fi
 
 # enable programmable completion features.
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    source /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        source /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        source /etc/bash_completion
+    fi
 fi
 
 # My function definitions.
@@ -62,10 +62,10 @@ fi
 # Set the sudo editor. Use gvim if we are not in an SSH term and the
 # X11 display number is under 10.
 if is_command gvim && [ "$SSH_TTY$DISPLAY" = "${DISPLAY#*:[1-9][0-9]}" ]; then
-  export VISUAL="$(command -v gvim) -f"
-  SUDO_EDITOR="$VISUAL"
+    export VISUAL="$(command -v gvim) -f"
+    SUDO_EDITOR="$VISUAL"
 else
-  SUDO_EDITOR="$EDITOR"
+    SUDO_EDITOR="$EDITOR"
 fi
 
 # make less more friendly for non-text input files, see lesspipe(1)

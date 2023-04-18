@@ -1,0 +1,26 @@
+# Skip the startup message.
+startup_message off
+
+# Go to home dir.
+chdir
+
+# Automatically detach on hangup 
+autodetach on
+
+# Change default scrollback value for new windows.
+defscrollback 10000
+
+# Start with visual bell as default.
+vbell on
+vbell_msg "bell on %t (%n)"
+
+# Look and Feel.
+caption string "%?%F%{= Bk}%? %C%A %D %d-%m-%Y %{= kB} %t%= %?%F%{= Bk}%:%{= wk}%? %n "
+hardstatus alwayslastline
+hardstatus string '%{= kr}[ %{K}%H %{r}]%{w}[%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{w}]%{g}[%{B} %d/%m/%y %{W}%c %{g}]'
+
+activity "Activity in %t(%n)"
+
+shelltitle "$ |shell:"
+shell -$SHELL
+

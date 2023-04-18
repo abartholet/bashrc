@@ -130,3 +130,4 @@ if [ -d $HOME/.bashrc.d ]; then
         source $i
     done
 fi
+

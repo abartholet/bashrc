@@ -63,3 +63,12 @@ backup()
         cp -r ${1}{,.${backup_suffix}}
     fi
 }
+
+md()
+{
+  tmpfile=$(mktemp)
+  tmpfile=$tmpfile.html
+  pandoc $1 > $tmpfile
+  xdg-open $tmpfile
+}
+

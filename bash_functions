@@ -52,6 +52,8 @@ create_symlink() {
         backup $2
         rm -rf $2
         ln -s $1 $2
+    else
+        ln -sfT $1 $2
     fi
 }
 

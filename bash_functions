@@ -64,6 +64,7 @@ backup()
     fi
 }
 
+# Convert an md file to html and open in the user preferred application.
 md()
 {
   tmpfile=$(mktemp)

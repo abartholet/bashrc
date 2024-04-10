@@ -31,7 +31,7 @@ path_prepend() {
 }
 
 # Basic logging function to print the name of the calling script
-logger() {
+log() {
     echo "[$(basename $0)] ${1}"
 }
 

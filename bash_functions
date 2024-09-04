@@ -31,7 +31,7 @@ path_prepend() {
 }
 
 # Basic logging function to print the name of the calling script
-logger() {
+log() {
     echo "[$(basename $0)] ${1}"
 }
 
@@ -51,8 +51,10 @@ create_symlink() {
     if [ ! -h $2 ]; then
         backup $2
         rm -rf $2
+        ln -s $1 $2
+    else
+        ln -sfT $1 $2
     fi
-    ln -sf $1 $2
 }
 
 # Create a backup with a timestamped name.
